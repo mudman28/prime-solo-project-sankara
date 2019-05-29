@@ -9,7 +9,18 @@ function* fetchExperimentSaga(action){
       console.log('Error in FETCH EXPERIMENT request:', err);
   };
 }
+
+function* deleteExperimentSaga (action){
+    try{    
+      yield axios.delete(`/api/experiment`)
+      yield put({type: 'FETCH_EXPERIMENT'})
+    }catch(err){
+      console.log('Error in DELETE EXPERIMENT SAGA request:', err);
+    }
+}
+
 function* experimentSaga(action){
   yield takeEvery('FETCH_EXPERIMENT', fetchExperimentSaga);
+  yield takeEvery('DELETE_EXPERIMENT', deleteExperimentSaga);
 }
 export default experimentSaga;

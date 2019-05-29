@@ -1,9 +1,7 @@
-const secretsReducer = (state = [], action) => {
+const experimentReducer = (state = [], action) => {
     switch (action.type) {
-      case 'SET_SECRETS':
+      case 'SET_EXPERIMENT':
         return action.payload;
-      case 'UNSET_SECRETS':
-        return [];
       default:
         return state;
     }
@@ -11,5 +9,5 @@ const secretsReducer = (state = [], action) => {
   
   // user will be on the redux state at:
   // state.user
-  export default secretsReducer;
+  export default experimentReducer;
   
