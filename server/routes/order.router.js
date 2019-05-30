@@ -6,7 +6,7 @@ const router = express.Router();
 //the route to get all of the pending orders
 router.get('/', (req, res) => {
     pool.query(`SELECT 
-    to_char("order_date", 'MM/DD/YYYY') AS "date", 
+    to_char("order_date", 'MM/DD/YYYY') AS "order_date", 
     "cust_name", "address", 
     array_agg("candle_order"."quantity") AS "quantities", 
     array_agg("candle"."name") AS "candles"
@@ -14,7 +14,8 @@ router.get('/', (req, res) => {
     JOIN "candle_order" ON "order"."id"="candle_order"."order_id"
     JOIN "candle" ON "candle"."id"="candle_order"."candle_id"
     WHERE "isCompleted" = FALSE
-    GROUP BY ("order"."id");
+    GROUP BY ("order"."id")
+    ORDER BY ("order_date") ASC;
     `)
     .then((result) => {
         res.send(result.rows);
@@ -27,7 +28,7 @@ router.get('/', (req, res) => {
 //the route to get all of the completed orders
 router.get('/complete', (req, res) => {
   pool.query(`SELECT 
-  to_char("order_date", 'MM/DD/YYYY') AS "date", 
+  to_char("order_date", 'MM/DD/YYYY') AS "order_date", 
   "cust_name", "address", 
   array_agg("candle_order"."quantity") AS "quantities", 
   array_agg("candle"."name") AS "candles"
@@ -35,7 +36,8 @@ router.get('/complete', (req, res) => {
   JOIN "candle_order" ON "order"."id"="candle_order"."order_id"
   JOIN "candle" ON "candle"."id"="candle_order"."candle_id"
   WHERE "isCompleted" = TRUE
-  GROUP BY ("order"."id");
+  GROUP BY ("order"."id")
+  ORDER BY ("order_date") DESC;
   `)
   .then((result) => {
       res.send(result.rows);

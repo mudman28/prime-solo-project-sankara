@@ -13,7 +13,28 @@ class Transactions extends React.Component {
     return (
       <div className="grid-container">
        <div></div>
-       <div><h2>Transactions</h2></div>
+       <div>
+           <h2>Transactions</h2>
+           <table className="table table-dark table-striped">
+            <thead>
+              <tr>
+                <th className="dateRecord">Date Of Order</th>
+                <th>Customer Name</th>
+                <th>Address</th>
+                <th>Candle Order</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                {/* {this.props.orders.map(orderRow =>{
+                  return(
+                    <td key={orderRow.id}>{orderRow}</td>
+                    )
+                })}    */}
+              </tr>
+            </tbody>
+        </table>
+       </div>
        <div></div>
       </div>
     );

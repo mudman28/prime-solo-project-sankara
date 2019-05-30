@@ -25,6 +25,13 @@ class UserPage extends React.Component {
               </tr>
             </thead>
             <tbody>
+              <tr>
+                {/* {this.props.orders.map(orderRow =>{
+                  return(
+                    <td key={orderRow.id}>{orderRow}</td>
+                    )
+                })}    */}
+              </tr>
             </tbody>
         </table>
        </div>
