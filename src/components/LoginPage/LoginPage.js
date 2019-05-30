@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
-import submarineLogo from './submarine.svg';
+// import './LoginPage.css';
 
 class LoginPage extends Component {
   state = {
@@ -43,13 +42,20 @@ class LoginPage extends Component {
           </h2>
         )}
         <form onSubmit={this.login}>
-          <h1>Login</h1>
+          <div>
+            <input
+              className="log-in"
+              type="submit"
+              name="submit"
+              value="Sankara"
+            />
+          </div>
           <div>
             <label htmlFor="username">
-              Username:
               <input
                 type="text"
                 name="username"
+                placeholder="USERNAME"
                 value={this.state.username}
                 onChange={this.handleInputChangeFor('username')}
               />
@@ -57,23 +63,16 @@ class LoginPage extends Component {
           </div>
           <div>
             <label htmlFor="password">
-              Password:
               <input
                 type="password"
                 name="password"
+                placeholder="PASSWORD"
                 value={this.state.password}
                 onChange={this.handleInputChangeFor('password')}
               />
             </label>
           </div>
-          <div>
-            <input
-              className="log-in"
-              type="submit"
-              name="submit"
-              value="Log In"
-            />
-          </div>
+
         </form>
         <center>
           <button
@@ -83,9 +82,6 @@ class LoginPage extends Component {
           >
             Register
           </button>
-        </center>
-        <center>
-          <img src={submarineLogo} height="200px" />
         </center>
       </div>
     );

@@ -4,10 +4,24 @@ body {
 }
 
 .alert {
-    background-color: #ff4545;
-    margin: 50px;
+    background-color: #df86eb;
+    width: 35%;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 20px;
+    animation-name: alert;
+    animation-duration: 1s;
+    animation-direction: normal;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
 }
 
+@keyframes alert{
+    0% {color: rgb(0, 0, 0); background-color: #e60000}
+    34% {color: rgb(10, 4, 46); background-color: #f32e2e}
+    67% {color: rgb(0, 0, 0); background-color: #e60000}
+    100% {color: rgb(3, 1, 1); background-color: #f13838}
+}
 form {
     background-color: #dbd5d5;
     width: 30%;

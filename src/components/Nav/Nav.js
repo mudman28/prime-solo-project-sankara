@@ -4,31 +4,32 @@ import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 
+
 const Nav = (props) => (
   <div className="nav">
-    <Link to="/home">
-      <h2 className="nav-title">Security Submarine</h2>
-    </Link>
-    <div className="nav-right">
-      <Link className="nav-link" to="/home">
-        {/* Show this link if they are logged in or not,
-        but call this link 'Home' if they are logged in,
-        and call this link 'Login / Register' if they are not */}
-        {props.user.id ? 'Home' : 'Login / Register'}
-      </Link>
-      {/* Show the link to the info page and the logout button if the user is logged in */}
-      {props.user.id && (
-        <>
-          <Link className="nav-link" to="/secrets">
-            Secrets Page
-          </Link>
-          <LogOutButton className="nav-link"/>
-        </>
-      )}
-      {/* Always show this link since the about page is not protected */}
-      <Link className="nav-link" to="/about">
-        About
-      </Link>
+    <div className="container">
+      <div className="head">
+          <h2 className="nav-title">Sankara</h2>
+          <div className="nav-right">
+            <Link className="nav-link" to="/home">
+              {props.user.id ? 'Home' : 'Login / Register'}
+            </Link>
+            {props.user.id && (
+              <div>
+                <Link className="nav-link" to="/addOrder">
+                  ADD ORDER
+                </Link>
+                <Link className="nav-link" to="/candles">
+                  CANDLES
+                </Link>
+                <Link className="nav-link" to="/transactions">
+                  TRANSACTIONS
+                </Link>
+                <LogOutButton className="logOutBtn"/>
+              </div>
+            )}
+          </div>
+      </div>
     </div>
   </div>
 );

@@ -58,7 +58,7 @@ router.post('/', (req, res) => {
       INSERT INTO "candle_order" ("order_id", "candle_id", "quantity") 
       VALUES ($1, $2, $3);
       `
-      pool.query(queryText2, [newOrder.order_id, newOrder.candle_id, newOrder.quantity])
+      pool.query(queryText2, [newOrder.order_id, newOrder.candle_id, newOrder.quantity, result.rows[0].id])
     .then((result) => {
       console.log(result.rows);
       res.sendStatus(201);
