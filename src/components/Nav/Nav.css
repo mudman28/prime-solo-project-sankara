@@ -1,36 +1,87 @@
 .nav-title {
-    font-size: 24px;
-    font-weight: 700;
-    display: inline-block;
-    color: #f2f2f2;
-    padding-left: 10px;
+  color: rgb(221, 187, 94);
+  font-size: 3rem;
+  font-weight: 300;
+  animation-name: myanimation;
+  animation-duration: 11s;
+  animation-direction: normal;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  margin-top: 0px;
+}
+
+@keyframes myanimation{
+    0% {color: rgb(221, 187, 94);}
+    13% {color: rgb(221, 134, 52);}
+    25% {color: rgb(156, 112, 18);}
+    38% {color: rgb(218, 133, 63);}
+    50% {color: rgb(221, 187, 94);}
+    63% {color: rgb(230, 139, 3);}
+    75% {color: rgb(196, 52, 131);}
+    80% {color: rgb(211, 101, 73);}
+    88% {color: rgb(233, 137, 48);}
+    100% {color: rgb(216, 172, 62);}
 }
 
 .nav {
-  overflow: hidden;
-  background-color: #000080;
+  width: 100%;
+  height: 23vh;
+  background: linear-gradient(to bottom, rgba(0,0,0,.8), rgba(0,0,0,.5)), rgb(81, 16, 165) center no-repeat;
+  background-size: cover;
 }
 
-.nav-link {
+.container{
+  max-width: 120rem;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.head{
+  text-align: right;
+  text-decoration: none;
+  color: #eee;
+  padding-top: 2.5rem;
+  text-transform: uppercase;
+}
+
+.nav-link { 
   float: left;
   color: #f2f2f2;
-  background-color: #000080;
   text-align: center;
   padding: 24px 10px;
   text-decoration: none;
-  font-size: 15px;
-
-  /* these last two make the logout button in
-  the nav bar look like another link */
+  font-size: 14px;
   border:none;
   cursor: pointer;
   outline:0;
+} 
+
+.nav-right .nav-link{
+  padding: 3px;
+  list-style: none;
+  display: inline;
+  transition-property: color;
+  transition-duration: 1s;
 }
 
-.nav-link:hover {
-  background-color: #000060;
+.nav-right .nav-link:hover {
+  color: rgb(211, 165, 66)
 }
 
 .nav-right {
-  float: right;
+  list-style-type: none;
+  color: rgb(9, 11, 12);
+  text-align: left;
+}
+
+.logOutBtn{
+  padding: 2px;
+  background-color: black;
+  color: #f2f2f2;
+  transition-property: background-color;
+  transition-duration: 2s
+}
+
+.logOutBtn:hover {
+  background-color: rgb(81, 16, 165);
 }

@@ -17,15 +17,11 @@ CREATE TABLE "order" (
     "isCompleted" BOOLEAN DEFAULT FALSE
 );
 
-INSERT INTO "order" ("order_date", "cust_name", "address") VALUES ('05/27/2019', 'Artie Crawford', '1234 Sesame St, Saint Paul, MN 55106'),
-('05/28/2019', 'Paul Robbins', '4321 Moonwalk Ave, Saint Paul, MN 55106')
-;
-
 CREATE TABLE "candle_order" (
     "id" SERIAL PRIMARY KEY,
-    "order_id" INTEGER,
-    "candle_id" INTEGER,
-    "quanity" INTEGER
+    "order_id" INTEGER REFERENCES "order" ON DELETE CASCADE,
+    "candle_id" INTEGER REFERENCES "candle",
+    "quantity" INTEGER
 );
 
 CREATE TABLE "candle" (
@@ -34,9 +30,33 @@ CREATE TABLE "candle" (
     "description" VARCHAR (255) NOT NULL,
     "preparation" VARCHAR (255) NOT NULL,
     "note" VARCHAR (255) NOT NULL,
-    "amount_in_stock" INTEGER,
+    "amount_in_stock" INTEGER DEFAULT '0',
     "isExperiment" BOOLEAN DEFAULT FALSE
 );
+
+INSERT INTO "order" ("order_date", "cust_name", "address") 
+VALUES 
+('05/20/2019', 'Paul Robbins', '4321 Moonwalk Ave, Saint Paul, MN 55106'),
+('05/27/2019', 'Artie Crawford', '1234 Sesame St, Saint Paul, MN 55106'),
+('05/28/2019', 'Paul Robbins', '4321 Moonwalk Ave, Saint Paul, MN 55106'),
+('05/29/2019', 'Nicole Gooden', '4327 Moonwalk Ave, Saint Paul, MN 55106'),
+('05/28/2019', 'Sarah Robbins', '555 Riverdance Ave, Saint Paul, MN 55106')
+;
+
+
+
+INSERT INTO "candle_order" ("order_id", "candle_id", "quantity") VALUES 
+('3', '7', '1'),
+('1', '10', '2'),
+('4', '5', '3'),
+('2', '2', '1'),
+('1', '8', '2'),
+('5', '3', '1'),
+('5', '4', '1'),
+('3', '1', '1')
+;
+
+WHEN
 
 INSERT INTO "candle" ("name", "description", "preparation", "note", "amount_in_stock") VALUES 
 ('Midnight Marauders', 
