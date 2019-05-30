@@ -77,7 +77,7 @@ router.put('/', (req, res) => {
     updatedCandle.note,
     updatedCandle.amount_in_stock
     ];
-    pool.query(queryText, queryValues)
+    pool.query(queryText, queryValues, [req.params.id])
     .then(() => { res.sendStatus(200); })
     .catch((err) => {
       console.log('Error in PUT /api/candle', err);

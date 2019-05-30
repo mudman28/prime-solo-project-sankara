@@ -6,7 +6,7 @@ const router = express.Router();
 //the route to get all of the pending orders
 router.get('/', (req, res) => {
     pool.query(`SELECT 
-    to_char("order_date", 'MM/DD/YYYY'), 
+    to_char("order_date", 'MM/DD/YYYY') AS "date", 
     "cust_name", "address", 
     array_agg("candle_order"."quantity") AS "quantities", 
     array_agg("candle"."name") AS "candles"
@@ -27,7 +27,7 @@ router.get('/', (req, res) => {
 //the route to get all of the completed orders
 router.get('/complete', (req, res) => {
   pool.query(`SELECT 
-  to_char("order_date", 'MM/DD/YYYY'), 
+  to_char("order_date", 'MM/DD/YYYY') AS "date", 
   "cust_name", "address", 
   array_agg("candle_order"."quantity") AS "quantities", 
   array_agg("candle"."name") AS "candles"
@@ -96,7 +96,7 @@ router.put('/', (req, res) => {
     updatedOrder.cust_name,
     updatedOrder.address,
     ];
-    pool.query(queryText, queryValues)
+    pool.query(queryText, queryValues, [req.params.id])
     .then(() => { res.sendStatus(200); })
       const queryText2 = `UPDATE "order"
       SET "order_id" = $1, 
@@ -108,7 +108,7 @@ router.put('/', (req, res) => {
       updatedOrder.candle_id,
       updatedOrder.quantity,
       ];
-    pool.query(queryText2, queryValues2)
+    pool.query(queryText2, queryValues2, [req.params.id])
     .then(() => { res.sendStatus(200); 
     })
     .catch((err) => {
