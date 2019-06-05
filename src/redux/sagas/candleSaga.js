@@ -22,16 +22,16 @@ function* postCandleSaga (action){
 
 function* deleteCandleSaga (action){
   try{    
-    yield axios.delete(`/api/candle`)
+    yield axios.delete(`/api/candle/${action.payload.id}`)
     yield put({type: 'FETCH_CANDLE'})
   }catch(err){
     console.log('Error in DELETE CANDLE SAGA request:', err);
   }
 }
-
+// ${candle.id}
 function* updateCandleSaga (action){
   try{    
-    yield axios.put(`/api/candle`, action.payload)
+    yield axios.put(`/api/candle/${action.payload.id}`, action.payload)
     yield put({type: 'FETCH_CANDLE'})
   }catch(err){
     console.log('Error in UPDATE CANDLE SAGA request:', err);

@@ -4,7 +4,10 @@ const pool = require('../modules/pool');
 
 // This route *should* return the logged in users pets
 router.get('/', (req, res) => {
-    let queryText = `SELECT * FROM "candle" WHERE "isExperiment" = FALSE;`;
+    let queryText = 
+    `SELECT * FROM "candle" 
+    WHERE "isExperiment" = FALSE
+    ORDER BY ("candle"."id") DESC;`;
     pool.query(queryText).then((result) => {
         console.log(result.rows);
         res.send(result.rows);
@@ -47,8 +50,7 @@ router.post('/', (req, res) => {
  * Delete an item if it's something the logged in user added
  */
 router.delete('/:id', (req, res) => {
-    pool.query('DELETE FROM "candle" WHERE id=$1', [req.params.id])
-    .then((result) => {
+    pool.query('DELETE FROM "candle" WHERE id=$1', [req.params.id]).then((result) => {
         res.sendStatus(200);
     }).catch((error) => {
         console.log('Error in DELETE /api/candle', error);
@@ -60,25 +62,25 @@ router.delete('/:id', (req, res) => {
 /**
  * Update an item if it's something the logged in user added
  */
-router.put('/', (req, res) => {
+router.put('/:id', (req, res) => {
     const updatedCandle = req.body;
   
     const queryText = `UPDATE "candle"
-    SET "name", 
-    "description", 
-    "preparation", 
-    "note"
-    "amount_in_stock";`;
+    SET "name" = $1, 
+    "description" = $2, 
+    "preparation" = $3, 
+    "note" = $4,
+    "amount_in_stock" = $5 WHERE id=$6;`;
   
     const queryValues = [
     updatedCandle.name,
     updatedCandle.description,
     updatedCandle.preparation,
     updatedCandle.note,
-    updatedCandle.amount_in_stock
+    updatedCandle.amount_in_stock,
+    req.params.id
     ];
-    pool.query(queryText, queryValues, [req.params.id])
-    .then(() => { res.sendStatus(200); })
+    pool.query(queryText, queryValues).then(() => { res.sendStatus(200); })
     .catch((err) => {
       console.log('Error in PUT /api/candle', err);
       res.sendStatus(500);

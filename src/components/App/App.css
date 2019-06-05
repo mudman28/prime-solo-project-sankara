@@ -1,34 +1,45 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
+    background-color: #e0b48a
+}
+
+.sankara{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, rgba(30, 2, 43, 0.8), rgba(0,0,0,.5)), rgb(26, 15, 7) center no-repeat;
+    overflow: hidden; 
 }
 
 .alert {
     background-color: #df86eb;
-    width: 35%;
+    font-size: 12px;
+    width: 140px;
     margin: 0 auto;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 10px;
     animation-name: alert;
-    animation-duration: 1s;
+    animation-duration: 1.5s;
     animation-direction: normal;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
+    border-radius: 1px;
 }
 
 @keyframes alert{
-    0% {color: rgb(0, 0, 0); background-color: #e60000}
-    34% {color: rgb(10, 4, 46); background-color: #f32e2e}
-    67% {color: rgb(0, 0, 0); background-color: #e60000}
-    100% {color: rgb(3, 1, 1); background-color: #f13838}
+    0% {color: rgb(0, 0, 0); background-color: #da09be}
+    34% {color: rgb(10, 4, 46); background-color: #f32ed9}
+    67% {color: rgb(0, 0, 0); background-color: #d131a9}
+    100% {color: rgb(3, 1, 1); background-color: #da09be}
 }
-form {
-    background-color: #dbd5d5;
-    width: 30%;
-    height: 250px;
-    margin: 20px auto;
-    padding: 25px;
-    border-radius: 2px;
+.logForm {
+    margin: 0;
+    padding: 0;
+    box-shadow: 0 15px 40px rgba(0,0,0,1);
 }
 
 input {
@@ -36,7 +47,7 @@ input {
     margin-bottom: 10px;
 }
 
-.log-in, .log-out, .register {
+.log-in {
   background-color: #000080;
   border-radius: 4px;
   color: #f8f8f8;
@@ -46,18 +57,137 @@ input {
   cursor: pointer;
 }
 
-.log-in:hover, .log-out:hover, .register:hover {
+.log-in:hover {
   background-color: #000060;
 }
 
 /* This line makes the "Register" and "Login" buttons look like links */
 .link-button {
     background:none;
-    color:inherit;
+    color: red;
     border:none;
     padding:0;
     font: inherit;
     outline:0;
     border-bottom:1px solid #444; 
     cursor: pointer;
+    margin-top: 500px;  
 }
+
+.canList{
+    list-style-type: none;
+}
+
+.orderTable{
+    font-size: 16px;
+    table-layout: fixed;
+    width: 100%;
+    background-image: linear-gradient(200deg, #310168bb 20%, #213636bd 90%);
+    padding: 3px;
+}
+
+.moreRow{
+    font-size: 16px;
+}
+
+.tableRow{
+    font-size: 16px;
+    padding: 20px;
+    background-image: linear-gradient(200deg, #a98ccebb 20%, #0f2525bd 90%);
+    border: .5px;
+    transition-property: background-color, color;
+    transition-duration: .5s;
+
+}
+
+.tableRow:hover{
+    background-color: rgb(111, 0, 126);
+    color: rgb(160, 200, 206);
+}
+
+.tableRow:active{
+    background-color:rgb(119, 186, 194);
+    color: rgb(242, 208, 243)
+}
+
+table, th, tr {
+    border: .5px solid rgb(31, 13, 83);
+    height: 40px;
+    color: rgb(255, 242, 227);
+    box-shadow: inset -1px 3px 8px 3px #350404;
+    border-radius: 2px;
+    padding: 10px;
+}
+
+.candleView{
+    margin-left: 50px;
+    margin-top: 50px;
+    float: left;
+}
+
+.candleView .right {
+    width: 450px;
+    height: 100%;
+    border: 6px solid rgb(27, 17, 54);
+    opacity: 1;
+    margin-right: 50px;
+    margin-top: 50px;
+    font-size: 20px;
+    background-image: linear-gradient(110deg, #f36932bb 37%, #3b27ebbd 95%);
+}
+
+.candleCard {
+    width: 450px;
+    height: 300px;  
+}
+
+img{
+    width: 100%;
+}
+
+.form {
+    margin-left: 50px;
+    margin-top: 50px
+}
+
+.addCandle{
+    width: 100%;
+    height: 100%;
+    color: rgb(40, 6, 63);
+    font-size: 20px;
+    background-image: linear-gradient(200deg, #a98ccebb 20%, #215858bd 90%);
+    border: 2px solid rgb(27, 17, 54);
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+.addCandle:active{
+    background-color: rgb(157, 80, 230);
+}
+
+.editCan{
+    width: 50%;
+    height: 100%;
+    color: rgb(40, 6, 63);
+    font-size: 20px;
+    background-image: linear-gradient(200deg, #a98ccebb 20%, #215858bd 90%);
+    border: .5px solid rgb(27, 17, 54);
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+.discontinueCan{
+    width: 50%;
+    height: 100%;
+    color: rgb(40, 6, 63);
+    font-size: 20px;
+    background-image: linear-gradient(200deg, #a98ccebb 20%, #215858bd 90%);
+    border: .5px solid rgb(27, 17, 54);
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+.bodyCol{
+    text-align: center;
+    border: .1px solid rgb(27, 17, 54);
+}
+
