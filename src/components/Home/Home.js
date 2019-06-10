@@ -15,12 +15,29 @@ class UserPage extends React.Component {
   }
 
   render() {
-    console.log('new', this.state);
+    let today = new Date(Date.now()).toLocaleString();
+
     return (
-      <div>
-        <h2>Today's Date</h2>
-        <h2>Pending Orders</h2>
-        <table className="orderTable">
+      <div className="dashboard">
+        <h3>Today's Date</h3>
+        {today}
+        <br />
+        <br />
+        <div className="alertBox">
+          <h4>Check Inventory Alert:</h4>
+          <p className="alertNote">(any candle below 5 in stock)</p>
+        {this.props.candles.map((title, i) => {
+          if(title.amount_in_stock < 5)
+                  return (
+                    <ul className="alertList">
+                      <li>{title.name} - Amount: {title.amount_in_stock}</li>
+                    </ul>
+                  )
+                })}
+        </div>
+        <h1 className="pageHeader">Pending Orders</h1>
+        <p>*Check The Box Once An Order Is Completed</p>
+        <table className="mainTable">
           <thead>
             <tr>
               <th className="dateRecord">Date Of Order</th>
@@ -37,7 +54,7 @@ class UserPage extends React.Component {
           <tbody className="tableBody">
             {this.props.orders.map((orderRow, i) => {
               return (
-                <tr key={orderRow.id} className="tableRow">
+                <tr key={orderRow.id} className="tableRow" >
                   <td className="bodyCol">{orderRow.order_date}</td>
                   <td className="bodyCol">{orderRow.first_name}</td>
                   <td className="bodyCol">{orderRow.last_name}</td>
@@ -53,7 +70,8 @@ class UserPage extends React.Component {
                     })}
                   </td>
                   <td className="bodyCol">
-                    <input type="radio" key={orderRow.id} name="orderform"
+
+                    <input type="checkbox" className="check" key={orderRow.id} name="orderform"
                       onChange={this.handleChange(orderRow)} onClick={() => this.setState({ show: true })} />
                     <SweetAlert
                       show={this.state.show}
@@ -63,8 +81,9 @@ class UserPage extends React.Component {
                       showCancelButton
                       onConfirm={() => {
                         console.log('confirm'); // eslint-disable-line no-console
-                        this.setState({ show: false, order : {...this.state.order, isCompleted: true }});
+                        this.setState({ show: false, order: { ...this.state.order, isCompleted: true } });
                         this.props.dispatch({ type: 'UPDATE_COMPLETE', payload: this.state.order });
+                        this.props.history.push('/transactions')
                       }}
                       onCancel={() => {
                         console.log('cancel'); // eslint-disable-line no-console
@@ -90,6 +109,7 @@ class UserPage extends React.Component {
 // const mapStateToProps = ({user}) => ({ user });
 const mapStateToProps = state => ({
   orders: state.pendingReducer,
+  candles: state.candleReducer,
 });
 
 // this allows us to use <App /> in index.js

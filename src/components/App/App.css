@@ -1,7 +1,13 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
-    background-color: #e0b48a
+    background-color: #f3cca7
+}
+
+button {
+    color: white;
+    font-size: 20px;
+    text-transform: uppercase;
 }
 
 .sankara{
@@ -11,14 +17,14 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(to bottom, rgba(30, 2, 43, 0.8), rgba(0,0,0,.5)), rgb(26, 15, 7) center no-repeat;
+    background: linear-gradient(to bottom, rgba(70, 20, 94, 0.8), rgba(73, 7, 7, 0.5)), rgb(26, 15, 7) center no-repeat;
     overflow: hidden; 
 }
 
 .alert {
     background-color: #df86eb;
-    font-size: 12px;
-    width: 140px;
+    font-size: 10px;
+    width: 100%;
     margin: 0 auto;
     text-align: center;
     margin-top: 10px;
@@ -42,37 +48,73 @@ body {
     box-shadow: 0 15px 40px rgba(0,0,0,1);
 }
 
-input {
-    margin: 5px;
+.logTitle {
+    color: rgb(221, 94, 215);
+    font-weight: 300;
+    animation-name: sankara;
+    animation-duration: 11s;
+    animation-direction: normal;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    margin-top: 0px;
+    font-stretch: ultra-expanded;
+    font-size: 40px;
+  }
+  
+  @keyframes sankara{
+      0% {color: rgb(221, 181, 94);}
+      13% {color: rgb(221, 190, 52);}
+      25% {color: rgb(156, 101, 18);}
+      38% {color: rgb(218, 99, 63);}
+      50% {color: rgb(221, 151, 94);}
+      63% {color: rgb(192, 3, 230);}
+      75% {color: rgb(196, 52, 160);}
+      80% {color: rgb(211, 163, 73);}
+      88% {color: rgb(233, 190, 48);}
+      100% {color: rgb(221, 208, 94);}
+  }
+
+.user {
     margin-bottom: 10px;
+    height: 30px;
+    width: 205px;
+    font-family: monospace;
+    cursor: pointer;
+    box-sizing: border-box;
+    position: relative;
 }
 
+
 .log-in {
-  background-color: #000080;
+  background-color: #0c0c2e;
   border-radius: 4px;
-  color: #f8f8f8;
-  min-height: 50px;
-  min-width: 100px;
+  color: #d6ade2;
+  height: 30px;
+  width: 206px;
   outline:0;
   cursor: pointer;
 }
 
 .log-in:hover {
-  background-color: #000060;
+  background-color: #66027a;
 }
 
 /* This line makes the "Register" and "Login" buttons look like links */
 .link-button {
     background:none;
-    color: red;
+    color: #e7ac5e;
     border:none;
     padding:0;
     font: inherit;
     outline:0;
-    border-bottom:1px solid #444; 
     cursor: pointer;
     margin-top: 500px;  
 }
+
+.link-button:hover {
+    color: #d387eb; 
+}
+
 
 .canList{
     list-style-type: none;
@@ -81,7 +123,24 @@ input {
 .orderTable{
     font-size: 16px;
     table-layout: fixed;
+    width: 45%;
+    background-image: linear-gradient(200deg, #213636bd 90%, #310168bb 20%);
+    padding: 3px;
+    padding-left: 4px
+}
+
+.mainTable{
+    font-size: 15px;
+    table-layout: fixed;
     width: 100%;
+    background-image: linear-gradient(200deg, #310168bb 20%, #213636bd 90%);
+    padding: 3px;
+}
+
+.candleTable{
+    font-size: 16px;
+    table-layout: fixed;
+    width: 90%;
     background-image: linear-gradient(200deg, #310168bb 20%, #213636bd 90%);
     padding: 3px;
 }
@@ -120,20 +179,35 @@ table, th, tr {
 }
 
 .candleView{
-    margin-left: 50px;
+    
+    margin-left: 100px;
     margin-top: 50px;
-    float: left;
+    margin-bottom: 100px;
+ }
+
+.plainView{
+    width: 450px;
+    height: auto;
+    border: 6px solid rgb(27, 17, 54);
+    opacity: 1;
+    margin-right: 50px;
+    margin-bottom: 10%;
+    margin-left: 50px;
+    font-size: 20px;
+    background-image: linear-gradient(110deg, #000000bb 37%, #02010fbd 95%);
 }
 
 .candleView .right {
     width: 450px;
-    height: 100%;
+    height: auto;
     border: 6px solid rgb(27, 17, 54);
     opacity: 1;
     margin-right: 50px;
-    margin-top: 50px;
+    margin-bottom: 10%;
+    margin-left: 50px;
+    /* margin-top: 50px; */
     font-size: 20px;
-    background-image: linear-gradient(110deg, #f36932bb 37%, #3b27ebbd 95%);
+    background-image: linear-gradient(110deg, #f5d7bc 37%, #f1c945bd 95%);
 }
 
 .candleCard {
@@ -146,8 +220,9 @@ img{
 }
 
 .form {
-    margin-left: 50px;
-    margin-top: 50px
+    margin-left: 100px;
+    margin-top: 50px;
+    margin-bottom: 100px;
 }
 
 .addCandle{
@@ -188,6 +263,153 @@ img{
 
 .bodyCol{
     text-align: center;
+    padding: 8px;
     border: .1px solid rgb(27, 17, 54);
 }
+.smallCol{
+    text-align: center;
+    width: 15%;
+}
 
+.smallerCol{
+    text-align: center;
+    width: 35%;
+}
+.longInput{
+    width: 200px
+}
+.shortInput{
+    text-align: center;
+    width: 70px
+}
+
+input[type=checkbox] {
+    transform: scale(2);
+    -ms-transform: scale(2);
+    -webkit-transform: scale(2);
+    padding: 15px;
+}
+
+.dashboard{
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 50px;
+}
+
+.transaction{
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 50px;
+}
+
+.alertBox{
+    width: 220px;
+    margin-left: 20px;
+    padding-left: 10px;
+    background-color: #d6baf7;
+    border-style: solid;
+    border-width: 3px;
+}
+
+.editInput{
+    padding: 20px
+}
+
+.candleHead{
+    margin-left: 5px;
+    font-size: 22px;
+    font-weight: bold;
+}
+.candleBody{
+    margin-left: 15px;
+    font-size: 18px
+}
+
+.candleSelect{
+    margin-top: 140px
+}
+
+.candleBut{
+    padding: 5px;
+    width: 100%
+}
+
+.shortInputQ{
+    margin-left: 15px;
+    text-align: center;
+    width: 40px;
+}
+
+.shortInputStock{
+ 
+    display: left;
+    text-align: center;
+    width: 70px;
+
+}
+
+.dateInput{
+    background: #f3d8bf;
+    border: #c47227
+}
+
+
+.label{
+    font-weight: bold;
+    color: #4b1157;
+    text-shadow: .5px 0px .3px rgb(3, 27, 34);
+}
+
+.pageHeader{
+    text-shadow: 1px .5px .7px #8e22a3;
+}
+
+.secondHeader{
+    color: #2b0533;
+    margin-left: 60px;
+    text-decoration: underline;
+}
+
+.candleStock{
+    font-size: 15px;
+    text-align: right;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1s;
+  }
+
+  @-webkit-keyframes fade {
+    from {opacity: .5} 
+    to {opacity: 1}
+  }
+  
+  @keyframes fade {
+    from {opacity: .3} 
+    to {opacity: 1}
+  }
+
+  .alertList{
+    list-style-type: none;
+    animation-name: alert2;
+    animation-duration: 1s;
+    animation-direction: normal;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+
+  @keyframes alert2{
+    0% {color: rgb(0, 0, 0); color: #000000}
+    34% {color: rgb(10, 4, 46); color: #a31891}
+    67% {color: rgb(0, 0, 0); color: #000000}
+}
+
+.alertNote{
+    font-size: 12px;
+    margin-left: 10px
+}

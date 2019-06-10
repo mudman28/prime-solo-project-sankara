@@ -8,10 +8,10 @@ class Transactions extends React.Component {
 
   render() {
     return (
-      <div>
-            <h2>Transactions</h2>
+      <div className="transaction">
+            <h1 className="pageHeader">Transactions</h1>
             <p>*Below is a list of all the completed orders</p>
-            <table className="orderTable">
+            <table className="mainTable">
               <thead>
                 <tr>
                   <th className="dateRecord">Date Of Order</th>

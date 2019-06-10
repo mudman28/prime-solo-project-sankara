@@ -1,13 +1,11 @@
-let initialState ={
-    
-}
+let initialState ={}
 
-const addOrderReducer = (state = [], action) => {
+const addOrderReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'SEND_CAND':
+        case 'SEND_CUST':
             return  action.payload
         case 'CANCEL_ORDER':
-            return []
+            return {}
         default:
             return state;
     }

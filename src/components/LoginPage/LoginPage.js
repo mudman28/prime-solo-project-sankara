@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
 // import './LoginPage.css';
 
 class LoginPage extends Component {
@@ -35,15 +36,8 @@ class LoginPage extends Component {
       <div className="sankara">
 
         <div>
+          <h2 className="logTitle">Sankara</h2>
           <form className="logForm" onSubmit={this.login}>
-            <div>
-              <input
-                className="log-in"
-                type="submit"
-                name="submit"
-                value="Sankara"
-              />
-            </div>
             <div>
               <label htmlFor="username">
                 <input
@@ -67,7 +61,15 @@ class LoginPage extends Component {
                   onChange={this.handleInputChangeFor('password')}
                 />
               </label>
-                      <div>
+             <div>
+             <div>
+              <input
+                className="log-in"
+                type="submit"
+                name="submit"
+                value="LOGIN"
+              />
+            </div>
           {this.props.errors.loginMessage && (
             <h2
               className="alert"
