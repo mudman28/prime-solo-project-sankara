@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
 // import './LoginPage.css';
 
 class LoginPage extends Component {
@@ -32,53 +33,61 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <div>
-        {this.props.errors.loginMessage && (
-          <h2
-            className="alert"
-            role="alert"
-          >
-            {this.props.errors.loginMessage}
-          </h2>
-        )}
-        <form onSubmit={this.login}>
-          <div>
-            <input
-              className="log-in"
-              type="submit"
-              name="submit"
-              value="Sankara"
-            />
-          </div>
-          <div>
-            <label htmlFor="username">
-              <input
-                type="text"
-                name="username"
-                placeholder="USERNAME"
-                value={this.state.username}
-                onChange={this.handleInputChangeFor('username')}
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="password">
-              <input
-                type="password"
-                name="password"
-                placeholder="PASSWORD"
-                value={this.state.password}
-                onChange={this.handleInputChangeFor('password')}
-              />
-            </label>
-          </div>
+      <div className="sankara">
 
-        </form>
+        <div>
+          <h2 className="logTitle">Sankara</h2>
+          <form className="logForm" onSubmit={this.login}>
+            <div>
+              <label htmlFor="username">
+                <input
+                  className="user"
+                  type="text"
+                  name="username"
+                  placeholder="USERNAME"
+                  value={this.state.username}
+                  onChange={this.handleInputChangeFor('username')}
+                />
+              </label>
+            </div>
+            <div>
+              <label htmlFor="password">
+                <input
+                  className="user"
+                  type="password"
+                  name="password"
+                  placeholder="PASSWORD"
+                  value={this.state.password}
+                  onChange={this.handleInputChangeFor('password')}
+                />
+              </label>
+             <div>
+             <div>
+              <input
+                className="log-in"
+                type="submit"
+                name="submit"
+                value="LOGIN"
+              />
+            </div>
+          {this.props.errors.loginMessage && (
+            <h2
+              className="alert"
+              role="alert"
+            >
+              {this.props.errors.loginMessage}
+            </h2>
+          )}
+        </div>
+            </div>
+          </form>
+        </div>
+
         <center>
           <button
             type="button"
             className="link-button"
-            onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
+            onClick={() => { this.props.dispatch({ type: 'SET_TO_REGISTER_MODE' }) }}
           >
             Register
           </button>

@@ -1,20 +1,52 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
 // this could also be written with destructuring parameters as:
 // const UserPage = ({ user }) => (
 // and then instead of `props.user.username` you could use `user.username`class SecretsPage extends Component {
 class Transactions extends React.Component {
-  componentDidMount() {
-    this.props.dispatch({type: 'FETCH_PENDING'});
-  }
+
 
   render() {
     return (
-      <div className="grid-container">
-       <div></div>
-       <div><h2>Transactions</h2></div>
-       <div></div>
+      <div className="transaction">
+            <h1 className="pageHeader">Transactions</h1>
+            <p>*Below is a list of all the completed orders</p>
+            <table className="mainTable">
+              <thead>
+                <tr>
+                  <th className="dateRecord">Date Of Order</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Street Address</th>
+                  <th>City</th>
+                  <th>State</th>
+                  <th>Zip</th>
+                  <th>Candle Order</th>
+                </tr>
+              </thead>
+              <tbody className="tableBody">
+                {this.props.orders.map(orderRow => {
+                  return (
+                    <tr key={orderRow.id} className="moreRow">
+                      <td className="bodyCol">{orderRow.order_date}</td>
+                      <td className="bodyCol">{orderRow.first_name}</td>
+                      <td className="bodyCol">{orderRow.last_name}</td>
+                      <td className="bodyCol">{orderRow.street_address}</td>
+                      <td className="bodyCol">{orderRow.city}</td>
+                      <td className="bodyCol">{orderRow.state}</td>
+                      <td className="bodyCol">{orderRow.zip}</td>
+                      <td className="bodyCol">
+                        {orderRow.candles.map((candle, index) => {
+                          return (
+                            <li className="canList">{orderRow.quantities[index]} - {candle}</li>
+                          )
+                        })}
+                      </td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
       </div>
     );
   }
@@ -25,8 +57,9 @@ class Transactions extends React.Component {
 // if you wanted you could write this code like this:
 // const mapStateToProps = ({user}) => ({ user });
 const mapStateToProps = state => ({
-  user: state.user,
+  orders: state.completeReducer,
 });
+
 
 // this allows us to use <App /> in index.js
 export default connect(mapStateToProps)(Transactions);

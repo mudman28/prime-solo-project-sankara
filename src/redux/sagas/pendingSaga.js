@@ -12,8 +12,10 @@ function* fetchPendingSaga(action){
 
 function* postOrderSaga (action){
   try{ 
-    yield axios.post('/api/order', action.payload)
-    yield put({type : 'FETCH_PENDING'})
+    console.log(action.payload);
+    
+    yield axios.post('/api/order', action.payload);
+    yield put({type: 'FETCH_PENDING'});
   }catch(err){
     console.log('Error in ADD PENDING ORDERS request:', err);
   }

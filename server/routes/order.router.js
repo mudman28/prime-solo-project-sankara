@@ -5,117 +5,97 @@ const router = express.Router();
 
 //the route to get all of the pending orders
 router.get('/', (req, res) => {
-    pool.query(`SELECT 
-    to_char("order_date", 'MM/DD/YYYY') AS "date", 
-    "cust_name", "address", 
+  pool.query(`SELECT "order"."id" AS "order_id",
+    to_char("order_date", 'MM/DD/YYYY') AS "order_date", 
+    "first_name", "last_name", 
+    "street_address", "city", "state", "zip",
     array_agg("candle_order"."quantity") AS "quantities", 
-    array_agg("candle"."name") AS "candles"
+    array_agg("candle"."name") AS "candles",
+    "isCompleted"
     FROM "order"
     JOIN "candle_order" ON "order"."id"="candle_order"."order_id"
     JOIN "candle" ON "candle"."id"="candle_order"."candle_id"
     WHERE "isCompleted" = FALSE
-    GROUP BY ("order"."id");
+    GROUP BY ("order"."id")
+    ORDER BY ("order_date") ASC;
     `)
     .then((result) => {
-        res.send(result.rows);
+      res.send(result.rows);
     }).catch((error) => {
-        console.log('Error in GET /api/order', error)
-        res.sendStatus(500);
+      console.log('Error in GET /api/order', error)
+      res.sendStatus(500);
     })
 });
 
 //the route to get all of the completed orders
 router.get('/complete', (req, res) => {
-  pool.query(`SELECT 
-  to_char("order_date", 'MM/DD/YYYY') AS "date", 
-  "cust_name", "address", 
+  pool.query(`SELECT "order"."id" AS "order_id",
+  to_char("order_date", 'MM/DD/YYYY') AS "order_date", 
+  "first_name", "last_name", 
+  "street_address", "city", "state", "zip",
   array_agg("candle_order"."quantity") AS "quantities", 
-  array_agg("candle"."name") AS "candles"
+  array_agg("candle"."name") AS "candles",
+  "isCompleted"
   FROM "order"
   JOIN "candle_order" ON "order"."id"="candle_order"."order_id"
   JOIN "candle" ON "candle"."id"="candle_order"."candle_id"
   WHERE "isCompleted" = TRUE
-  GROUP BY ("order"."id");
+  GROUP BY ("order"."id")
+  ORDER BY ("order_date") DESC;
   `)
-  .then((result) => {
+    .then((result) => {
       res.send(result.rows);
-  }).catch((error) => {
+    }).catch((error) => {
       console.log('Error in GET /api/order', error)
       res.sendStatus(500);
-  })
+    })
 });
 
 //the route to post orders
 router.post('/', (req, res) => {
-    const newOrder = req.body;
-    const queryText = `
-      INSERT INTO "order" ("order_date", "cust_name", "address") 
-      VALUES ($1, $2, $3) RETURNING id;
+  const newOrder = req.body.orders;
+  const newCandles = req.body.candles
+  console.log(req.body);
+
+  const queryText = `
+      INSERT INTO "order" ("order_date", "first_name", "last_name", "street_address", "city", "state", "zip") 
+      VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id;
       `
-    pool.query(queryText, [newOrder.order_date, newOrder.cust_name, newOrder.address])
+  pool.query(queryText, [newOrder.order_date, newOrder.first_name, newOrder.last_name, newOrder.street_address, newOrder.city, newOrder.state, newOrder.zip])
     .then((result) => {
-      const queryText2 = `
+      
+      //makes sure that all my candle info for each array is being put into my database and waiting to complete
+      Promise.all(newCandles.map((title, i) => {
+        const queryText2 = `
       INSERT INTO "candle_order" ("order_id", "candle_id", "quantity") 
       VALUES ($1, $2, $3);
       `
-      pool.query(queryText2, [newOrder.order_id, newOrder.candle_id, newOrder.quantity, result.rows[0].id])
-    .then((result) => {
-      console.log(result.rows);
-      res.sendStatus(201);
-    })
-      console.log(result.rows);
-      res.sendStatus(201);
-    }).catch((error) => {
-      console.log(`Error in POST /api/order`, error);
-      res.sendStatus(500);
-    })
+        return pool.query(queryText2, [result.rows[0].id, title.id, title.quantity]).then((result) => {
+          
+        }).catch((error) => {
+          console.log(`Error in POST /api/order`, error);
+          res.sendStatus(500);
+        })
+      })).then( () => {
+        res.sendStatus(201)
+      })
   })
+})
 
-//the route to delete orders
-router.delete('/:id', (req, res) => {
-    pool.query('DELETE FROM "order" WHERE id=$1', [req.params.id])
-    .then((result) => {
-        res.sendStatus(200);
-    }).catch((error) => {
-        console.log('Error in DELETE /api/order', error);
-        res.sendStatus(500);
-    })
-});
-
-
-//the route to update orders
-router.put('/', (req, res) => {
+  //the route to delete orders
+  router.put('/:id', (req, res) => {
     const updatedOrder = req.body;
+
     const queryText = `UPDATE "order"
-    SET "order_date" = $1, 
-    "cust_name" = $2, 
-    "address" = $3, 
-    WHERE id=$4;`;
+  SET "isCompleted" = $1 WHERE id=$2 ;`
+
     const queryValues = [
-    updatedOrder.order_date,
-    updatedOrder.cust_name,
-    updatedOrder.address,
+      updatedOrder.isCompleted, req.params.id
     ];
-    pool.query(queryText, queryValues, [req.params.id])
-    .then(() => { res.sendStatus(200); })
-      const queryText2 = `UPDATE "order"
-      SET "order_id" = $1, 
-      "candle_id" = $2, 
-      "quantity" = $3, 
-      WHERE id=$4;`;
-      const queryValues2 = [
-      updatedOrder.order_id,
-      updatedOrder.candle_id,
-      updatedOrder.quantity,
-      ];
-    pool.query(queryText2, queryValues2, [req.params.id])
-    .then(() => { res.sendStatus(200); 
-    })
-    .catch((err) => {
-      console.log('Error in PUT /api/order', err);
-      res.sendStatus(500);
-    })
-});
-
-
-module.exports = router;
+    pool.query(queryText, queryValues).then(() => { res.sendStatus(200); })
+      .catch((err) => {
+        console.log('Error in PUT /api/candle', err);
+        res.sendStatus(500);
+      });
+  });
+  module.exports = router;

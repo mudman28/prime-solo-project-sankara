@@ -6,6 +6,8 @@ import candleReducer from './candleReducer';
 import completeReducer from './completeReducer';
 import pendingReducer from './pendingReducer';
 import experimentReducer from './experimentReducer';
+import addOrderReducer from './addOrderReducer';
+import addOrderCandleReducer from './addOrderCandleReducer';
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -20,6 +22,8 @@ const rootReducer = combineReducers({
   experimentReducer,
   pendingReducer,
   completeReducer,
+  addOrderReducer,
+  addOrderCandleReducer
 });
 
 export default rootReducer;
