@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool');
 
-// This route *should* return the logged in users pets
+// this route gets the candle information
 router.get('/', (req, res) => {
     let queryText = 
     `SELECT * FROM "candle" 
@@ -17,6 +17,7 @@ router.get('/', (req, res) => {
     });
 });
 
+// this route gets the experiment information
 router.get('/experiment', (req, res) => {
     let queryText = `SELECT * FROM "candle" WHERE "isExperiment" = TRUE;`;
     pool.query(queryText).then((result) => {
@@ -28,7 +29,7 @@ router.get('/experiment', (req, res) => {
     });
 });
 
-// This route *should* add a pet for the logged in user
+//this route posts new candles
 router.post('/', (req, res) => {
     const newCandle = req.body;
     const queryText = `
@@ -46,9 +47,7 @@ router.post('/', (req, res) => {
 })
 
 
-/**
- * Delete an item if it's something the logged in user added
- */
+//this route deletes a candle 
 router.delete('/:id', (req, res) => {
     pool.query('DELETE FROM "candle" WHERE id=$1', [req.params.id]).then((result) => {
         res.sendStatus(200);
@@ -59,9 +58,7 @@ router.delete('/:id', (req, res) => {
 });
 
 
-/**
- * Update an item if it's something the logged in user added
- */
+//this route updates candle information
 router.put('/:id', (req, res) => {
     const updatedCandle = req.body;
   
@@ -87,4 +84,19 @@ router.put('/:id', (req, res) => {
     });
 });
 
+//this route updates candle inventory when an order is completed
+router.put('/inventory/:id', (req, res) => {
+    const updatedCandle = req.body;
+  
+    const queryText = `UPDATE "candle"
+    SET "amount_in_stock" = $1 
+    WHERE id=$2;`;
+  
+    const queryValues = [updatedCandle.amount_in_stock, req.params.id];
+    pool.query(queryText, queryValues).then(() => { res.sendStatus(200); })
+    .catch((err) => {
+      console.log('Error in PUT /api/candle', err);
+      res.sendStatus(500);
+    });
+});
 module.exports = router;

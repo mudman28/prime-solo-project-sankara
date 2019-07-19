@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
 
+//Not in use yet
 function* fetchExperimentSaga(action){
   try{
       const elementsResponse = yield axios.get(`/api/candle/experiment`);
@@ -10,6 +11,7 @@ function* fetchExperimentSaga(action){
   };
 }
 
+//Not in use yet
 function* deleteExperimentSaga (action){
     try{    
       yield axios.delete(`/api/experiment`)

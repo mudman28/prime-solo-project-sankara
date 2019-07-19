@@ -1,3 +1,5 @@
+
+//gets the initial pending order information
 const pendingReducer = (state = [], action) => {
     switch (action.type) {
       case 'SET_PENDING':

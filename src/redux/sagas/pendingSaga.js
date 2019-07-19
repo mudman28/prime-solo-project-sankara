@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
 
+
+//Gets the pending order information from the database
 function* fetchPendingSaga(action){
   try{
     const elementsResponse = yield axios.get(`/api/order`);
@@ -10,6 +12,7 @@ function* fetchPendingSaga(action){
   };
 }
 
+//Posts new order information into the database
 function* postOrderSaga (action){
   try{ 
     console.log(action.payload);
@@ -21,6 +24,7 @@ function* postOrderSaga (action){
   }
 }
 
+//Not in use yet
 function* deleteOrderSaga (action){
   try{    
     yield axios.delete(`/api/order`)

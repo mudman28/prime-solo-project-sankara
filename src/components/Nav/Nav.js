@@ -22,6 +22,9 @@ const Nav = (props) => (
                 <Link className="nav-link" to="/candles">
                   CANDLES
                 </Link>
+                {/* <Link className="nav-link" to="/transactions">
+                  Supplies
+                </Link> */}
                 <Link className="nav-link" to="/transactions">
                   TRANSACTIONS
                 </Link>
@@ -34,11 +37,6 @@ const Nav = (props) => (
   </div>
 );
 
-// Instead of taking everything from state, we just want the user
-// object to determine if they are logged in
-// if they are logged in, we show them a few more links 
-// if you wanted you could write this code like this:
-// const mapStateToProps = ({ user }) => ({ user });
 const mapStateToProps = state => ({
   user: state.user,
 });

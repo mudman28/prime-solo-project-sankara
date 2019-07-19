@@ -1,3 +1,5 @@
+
+//Stores candle information
 const candleReducer = (state = [], action) => {
     switch (action.type) {
       case 'SET_CANDLE':

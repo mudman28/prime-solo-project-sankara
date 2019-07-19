@@ -27,7 +27,7 @@ router.get('/', (req, res) => {
     })
 });
 
-//the route to get all of the completed orders
+//the route to get all of the completed orders(transactions)
 router.get('/complete', (req, res) => {
   pool.query(`SELECT "order"."id" AS "order_id",
   to_char("order_date", 'MM/DD/YYYY') AS "order_date", 
@@ -35,7 +35,8 @@ router.get('/complete', (req, res) => {
   "street_address", "city", "state", "zip",
   array_agg("candle_order"."quantity") AS "quantities", 
   array_agg("candle"."name") AS "candles",
-  "isCompleted"
+  "isCompleted",
+  "completion_date"
   FROM "order"
   JOIN "candle_order" ON "order"."id"="candle_order"."order_id"
   JOIN "candle" ON "candle"."id"="candle_order"."candle_id"
@@ -64,7 +65,7 @@ router.post('/', (req, res) => {
   pool.query(queryText, [newOrder.order_date, newOrder.first_name, newOrder.last_name, newOrder.street_address, newOrder.city, newOrder.state, newOrder.zip])
     .then((result) => {
       
-      //makes sure that all my candle info for each array is being put into my database and waiting to complete
+      //makes sure that all the candle info for each array is inserted until the array is finished
       Promise.all(newCandles.map((title, i) => {
         const queryText2 = `
       INSERT INTO "candle_order" ("order_id", "candle_id", "quantity") 
@@ -87,10 +88,10 @@ router.post('/', (req, res) => {
     const updatedOrder = req.body;
 
     const queryText = `UPDATE "order"
-  SET "isCompleted" = $1 WHERE id=$2 ;`
+  SET "isCompleted" = $1, completion_date = $2 WHERE id=$3 ;`
 
     const queryValues = [
-      updatedOrder.isCompleted, req.params.id
+      updatedOrder.isCompleted, updatedOrder.completion_date, req.params.id
     ];
     pool.query(queryText, queryValues).then(() => { res.sendStatus(200); })
       .catch((err) => {

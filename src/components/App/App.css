@@ -1,4 +1,5 @@
 body {
+    margin-top: 23.2vh;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
     background-color: #f3cca7
@@ -23,7 +24,9 @@ button {
 
 .alert {
     background-color: #df86eb;
-    font-size: 10px;
+    font-size: 15px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    height: 20px;
     width: 100%;
     margin: 0 auto;
     text-align: center;
@@ -34,6 +37,7 @@ button {
     animation-iteration-count: infinite;
     animation-timing-function: linear;
     border-radius: 1px;
+    color: #ffffff
 }
 
 @keyframes alert{
@@ -44,7 +48,7 @@ button {
 }
 .logForm {
     margin: 0;
-    padding: 0;
+    padding: 5;
     box-shadow: 0 15px 40px rgba(0,0,0,1);
 }
 
@@ -58,13 +62,13 @@ button {
     animation-timing-function: linear;
     margin-top: 0px;
     font-stretch: ultra-expanded;
-    font-size: 40px;
+    font-size: 80px;
   }
   
   @keyframes sankara{
       0% {color: rgb(221, 181, 94);}
       13% {color: rgb(221, 190, 52);}
-      25% {color: rgb(156, 101, 18);}
+      25% {color: rgb(211, 150, 58);}
       38% {color: rgb(218, 99, 63);}
       50% {color: rgb(221, 151, 94);}
       63% {color: rgb(192, 3, 230);}
@@ -77,7 +81,8 @@ button {
 .user {
     margin-bottom: 10px;
     height: 30px;
-    width: 205px;
+    width: 340px;
+    font-size: 20px;
     font-family: monospace;
     cursor: pointer;
     box-sizing: border-box;
@@ -89,8 +94,9 @@ button {
   background-color: #0c0c2e;
   border-radius: 4px;
   color: #d6ade2;
-  height: 30px;
-  width: 206px;
+  font-size: 20px;
+  height: 40px;
+  width: 342px;
   outline:0;
   cursor: pointer;
 }
@@ -217,6 +223,7 @@ table, th, tr {
 
 img{
     width: 100%;
+
 }
 
 .form {
@@ -250,6 +257,7 @@ img{
     transition-property: background-color;
     transition-duration: .5s;
 }
+
 .discontinueCan{
     width: 50%;
     height: 100%;
@@ -283,6 +291,78 @@ img{
     width: 70px
 }
 
+.formOutline{
+    margin-left: 7px;
+    border: 2px solid rgb(141, 102, 155);
+    padding-left: 15px;
+    padding-right: 50px;
+    padding-bottom: 15px;
+    margin-right: 40px;
+    border-radius: 12px;
+    box-shadow: 2px 3px #8f482c;
+    background-color: #f8dcc2
+}
+
+.reviewOutline{
+    border: 2px solid rgb(104, 75, 32);
+    padding-left: 15px;
+    padding-right: 50px;
+    padding-bottom: 10px;
+    border-radius: 12px;
+    box-shadow: inset -1px 2px 4px 2px #b47c3d;
+    background-image: linear-gradient(110deg, #eed6c2 34%, #f8d19e 95%);
+    margin-bottom: 30px;
+    margin-right: 20px;
+    font-size: 20px
+}
+
+.reviewOutline2{
+    border: 2px solid rgb(104, 75, 32);
+    padding-left: 15px;
+    padding-right: 50px;
+    padding-bottom: 10px;
+    border-radius: 12px;
+    box-shadow: inset -1px 2px 4px 2px #b47c3d;
+    background-image: linear-gradient(110deg, #eed6c2 34%, #f8d19e 95%);
+    margin-bottom: 30px;
+    width: 120px;
+    font-size: 20px;
+}
+
+.reviewCandles{
+    display: flex;
+    overflow-y: auto;
+}
+
+.reviewCandlesContainer{
+    width: 520px;
+    position: inline-block;
+
+}
+
+.reviewCandles::-webkit-scrollbar {
+    height: 18px;
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+  
+  .reviewCandles::-webkit-scrollbar-thumb
+  {
+      border-radius: 10px;
+      background-image: -webkit-gradient(linear,
+                                         left bottom,
+                                         right top,
+                                         color-stop(0.14, rgb(244, 223, 252)),
+                                         color-stop(0.57, rgb(134, 76, 167)),
+                                         color-stop(0.86, rgb(243, 170, 225)));
+  }
+  
+  .reviewCandles::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px rgb(218, 159, 70); 
+    background-color: rgb(233, 198, 133);
+    border-radius: 10px;
+  }
+
 input[type=checkbox] {
     transform: scale(2);
     -ms-transform: scale(2);
@@ -294,7 +374,17 @@ input[type=checkbox] {
     margin-left: 100px;
     margin-right: 100px;
     margin-top: 50px;
+    margin-bottom: 50px
 }
+
+.reviewPage{
+    font-weight: 500;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 50px;
+    margin-bottom: 50px
+}
+
 
 .transaction{
     margin-left: 100px;
@@ -326,7 +416,7 @@ input[type=checkbox] {
 }
 
 .candleSelect{
-    margin-top: 140px
+    margin-top: 100px
 }
 
 .candleBut{
@@ -349,24 +439,48 @@ input[type=checkbox] {
 }
 
 .dateInput{
-    background: #f3d8bf;
-    border: #c47227
+    background: #ffead8;
+    border: #c47227;
+    width: auto;
+    height: auto;
+    font-size: 15px;
+    text-align: center;
 }
 
+.formBut{
+    padding-top: 40px;
+    display: flex;
+    justify-content: center;
+    height: 50px;
+    margin-right: 150px
+}
 
 .label{
-    font-weight: bold;
-    color: #4b1157;
-    text-shadow: .5px 0px .3px rgb(3, 27, 34);
+    font-weight: bolder;
+    text-shadow: -1px -1px 0 rgb(167, 108, 74);
+    color: #644088;
 }
 
 .pageHeader{
     text-shadow: 1px .5px .7px #8e22a3;
 }
 
+.reviewHeader{
+    text-shadow: 1px .5px .7px #8e22a3;
+    font-size: 25px;
+}
+
+.reviewHeader2{
+    text-shadow: 1px .5px .7px #8e22a3;
+    font-size: 25px;
+    margin-top: 60px
+}
+
 .secondHeader{
+    font-weight: bolder;
+    font-size: 25.5px;
     color: #2b0533;
-    margin-left: 60px;
+    margin-bottom: 30px;
     text-decoration: underline;
 }
 
@@ -381,7 +495,7 @@ input[type=checkbox] {
     -webkit-animation-name: fade;
     -webkit-animation-duration: 1.5s;
     animation-name: fade;
-    animation-duration: 1s;
+    animation-duration: 1.5s;
   }
 
   @-webkit-keyframes fade {
