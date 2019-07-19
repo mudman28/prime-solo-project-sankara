@@ -6,6 +6,7 @@ import pendingSaga from './pendingSaga';
 import candleSaga from './candleSaga';
 import completeSaga from './completeSaga';
 import experimentSaga from './experimentSaga';
+import inventorySaga from './inventorySaga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -23,5 +24,6 @@ export default function* rootSaga() {
     candleSaga(),
     completeSaga(),
     experimentSaga(),
+    inventorySaga(),
   ]);
 }

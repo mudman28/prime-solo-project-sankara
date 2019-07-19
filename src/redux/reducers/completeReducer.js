@@ -1,3 +1,5 @@
+
+//gets the initial completed order information
 const completeReducer = (state = [], action) => {
     switch (action.type) {
       case 'SET_COMPLETE':

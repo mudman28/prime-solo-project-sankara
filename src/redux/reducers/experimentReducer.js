@@ -1,3 +1,5 @@
+
+//Not in use yet
 const experimentReducer = (state = [], action) => {
     switch (action.type) {
       case 'SET_EXPERIMENT':

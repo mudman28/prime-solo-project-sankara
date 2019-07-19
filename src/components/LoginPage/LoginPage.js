@@ -70,6 +70,10 @@ class LoginPage extends Component {
                 value="LOGIN"
               />
             </div>
+
+        </div>
+            </div>
+          </form>
           {this.props.errors.loginMessage && (
             <h2
               className="alert"
@@ -78,9 +82,6 @@ class LoginPage extends Component {
               {this.props.errors.loginMessage}
             </h2>
           )}
-        </div>
-            </div>
-          </form>
         </div>
 
         <center>
@@ -91,7 +92,9 @@ class LoginPage extends Component {
           >
             Register
           </button>
+
         </center>
+
       </div>
     );
   }

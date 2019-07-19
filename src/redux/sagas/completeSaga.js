@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
 
+//gets completed order info from the database
 function* fetchCompletedSaga(action){
   try{
       const elementsResponse = yield axios.get(`/api/order/complete`);
@@ -10,7 +11,7 @@ function* fetchCompletedSaga(action){
   };
 }
 
-
+//updates pending orders to completed orders in the database
 function* updateCompletedSaga(action){
   try{    
     yield axios.put(`/api/order/${action.payload.order_id}`, action.payload)

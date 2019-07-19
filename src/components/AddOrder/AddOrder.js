@@ -13,7 +13,15 @@ import Button from '@material-ui/core/Button';
 
 class AddOrder extends Component {
   state = {
-    order: {},
+    order: {
+      order_date: '',
+      first_name: '',
+      last_name: '',
+      street_address: '',
+      city: '',
+      state: '',
+      zip: ''
+    },
     line_items: new Map(),
   }
 
@@ -38,41 +46,23 @@ class AddOrder extends Component {
     });
   }
 
-  handleCancel = (event) => {
-    this.setState({
-        order: {},
-        line_items: new Map(),
-    });
-  }
+
   //submits order
   handleSubmit = (event) => {
+
     event.preventDefault();
     //turn this.state.line_items into array
-    console.log(this.state.line_items)
     let tempArray = Array.from(this.state.line_items.values())
     this.props.dispatch({ type: 'SEND_CUST', payload: this.state.order })
     this.props.dispatch({ type: 'SEND_CAND', payload: tempArray })
     this.props.history.push('/review')
+
   }
 
-  presentationInfo = (event) => {
-    event.preventDefault();
-    this.setState({
-      order: {
-        first_name: 'Mr.',
-        last_name: 'T',
-        street_address: '1020 Pity Fool Ln',
-        city: 'Minneapolis',
-        state: 'MN',
-        zip: '55404'
-      }
-    })
-}
-
   render() {
-    // console.log(this.props.candles[0].id);
     return (
       <div className="form">
+        {/* Candle Order form */}
         <form onSubmit={this.handleSubmit}>
           <div>
             <div>
@@ -83,13 +73,16 @@ class AddOrder extends Component {
                 <div className="custform">
                   <div>
                     <h2 className="secondHeader">Customer Information</h2>
-                    <h3 className="label">Date Of The Order:</h3>
-                      <input type="date" className="dateInput" 
+                    <div className="formOutline">
+                      <h3 className="label">Date Of The Order:</h3>
+                      <input type="date" className="dateInput"
                         onChange={this.handleChange('order_date')} />
+                    </div>
                     <div>
                       <br />
+                      <div className="formOutline">
                         <h3 className="label">Name:</h3>
-                            <div className="orderBlock">
+                        <div className="orderBlock">
                           <TextField
                             id="standard-search"
                             label="First Name"
@@ -108,11 +101,12 @@ class AddOrder extends Component {
                             onChange={this.handleChange('last_name')}
                           />
                         </div>
-                        <br />
-                        <br />
+                      </div>
+                      <br />
                     </div>
+                    <div className="formOutline">
                       <h3 className="label">Address:</h3>
-                        <div className="orderBlock">
+                      <div className="orderBlock">
                         <TextField
                           id="standard-search"
                           label="Street Address"
@@ -152,15 +146,14 @@ class AddOrder extends Component {
                           className="shortInput"
                         />
                       </div>
-                  </div>
-                  <div>
-
+                    </div>
                   </div>
                 </div>
               </Grid>
+              {/* Creates the list of candles to choose from. */}
               <Grid item xs>
                 <div className="candleSelect">
-                  <p onClick={this.presentationInfo}>*Add the amount to the candle order</p>
+                  <p>*Add the amount to the candle order</p>
                   <table className="orderTable">
                     <tbody className="tableBody">
                       {this.props.candles.map((title, i) => {
@@ -177,13 +170,10 @@ class AddOrder extends Component {
                   </table>
                 </div>
               </Grid>
-
             </Grid>
-            <br />
-            <Button variant="contained" type="submit" onSubmit={this.handleCancel}>CANCEL ORDER</Button>
-            <br />
-            <br />
-            <Button variant="contained" type="submit"> REVIEW ORDER </Button>
+            <div className="formBut">
+              <Button variant="contained" type="submit" style={{  width: 250, marginRight: 100 }}> REVIEW ORDER </Button>
+            </div>
           </div>
         </form>
       </div>

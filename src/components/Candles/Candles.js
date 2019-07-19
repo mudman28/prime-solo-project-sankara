@@ -12,11 +12,6 @@ import Button from '@material-ui/core/Button';
 import SweetAlert from 'sweetalert-react'; // eslint-disable-line import/no-extraneous-dependencies
 import 'sweetalert/dist/sweetalert.css'
 
-// This is one of our simplest components
-// It doesn't have local state, so it can be a function component.
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is, so it doesn't need 'connect()'
-
 class Candles extends Component {
 
   state = {
@@ -31,7 +26,6 @@ class Candles extends Component {
     },
     card: ''
   }
-
 
   handleChange = property => (event) => {
     console.log('new', event.target.value);
@@ -59,20 +53,6 @@ class Candles extends Component {
     });
   }
 
-  presentationInfo = (event) => {
-    event.preventDefault();
-    this.setState({
-      ...this.state,
-      candle_item: {
-        name: 'Apple Cinnamon',
-        description: '8 oz, double wicked, orange, coconut wax candle. The scent is apple cinnamon.',
-        preparation: 'Glue the wicks into the heated candle jars. Melt the wax down. Mix the wax, red dye and one ounce of apple cinnamon fragrance oils. Pour mixture in the jars and let it sit overnight.',
-        note: 'Apple Cinnamon',
-        amount_in_stock: 10,
-      }
-    })
-}
-
   handleEdit = (event) => {
     event.preventDefault();
     this.setState({
@@ -81,7 +61,6 @@ class Candles extends Component {
     });
   }
 
-
   handleDelete = (event) => {
     if (this.state.card === 'info') {
       console.log('final', this.state);
@@ -89,6 +68,7 @@ class Candles extends Component {
       this.setState({
         candle_item: 'none'
       });
+      window.location.reload()
     }
   }
 
@@ -107,7 +87,7 @@ class Candles extends Component {
               <Card className="candleCard fade">
                 <CardActionArea>
                   <CardMedia>
-                    <img src="https://images.unsplash.com/photo-1528351655744-27cc30462816?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80" alt="candle pic" />
+                    <img src={this.state.candle_item.path} alt="candle pic" />
                   </CardMedia>
                 </CardActionArea>
               </Card>
@@ -138,7 +118,7 @@ class Candles extends Component {
               <Card className="candleCard fade">
                 <CardActionArea>
                   <CardMedia>
-                    <img src="https://images.unsplash.com/photo-1528351655744-27cc30462816?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80" alt="candle pic" />
+                    <img src={this.state.candle_item.path} alt="candle pic" />
                   </CardMedia>
                 </CardActionArea>
               </Card>
@@ -237,7 +217,7 @@ class Candles extends Component {
               <Card className="candleCard fade">
                 <CardActionArea>
                   <CardMedia>
-                    <img src="https://images.unsplash.com/photo-1528351655744-27cc30462816?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80" alt="candle pic" />
+                    <img src="/images/candle.jpeg" alt="candle pic" resizeMode="contain" />
                   </CardMedia>
                 </CardActionArea>
               </Card>
@@ -250,7 +230,7 @@ class Candles extends Component {
         <h1 className="pageHeader">Candles</h1>
         <Grid container spacing={3}>
           {<Grid item xs>
-            <h3 className="secondHeader" onClick={this.presentationInfo}>SELECT A SCENT</h3>
+            <h3 className="secondHeader">Select a Scent</h3>
             {candleInfo}
           </Grid>}
           <Grid item xs>

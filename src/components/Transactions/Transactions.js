@@ -9,6 +9,7 @@ class Transactions extends React.Component {
   render() {
     return (
       <div className="transaction">
+      {/* lists a history of transactions */}
             <h1 className="pageHeader">Transactions</h1>
             <p>*Below is a list of all the completed orders</p>
             <table className="mainTable">
@@ -22,8 +23,10 @@ class Transactions extends React.Component {
                   <th>State</th>
                   <th>Zip</th>
                   <th>Candle Order</th>
+                  <th className="dateRecord">Date Of Completion</th>
                 </tr>
               </thead>
+              {/* creates each row for the completed orders */}
               <tbody className="tableBody">
                 {this.props.orders.map(orderRow => {
                   return (
@@ -42,6 +45,7 @@ class Transactions extends React.Component {
                           )
                         })}
                       </td>
+                      <td className="bodyCol">{orderRow.completion_date}</td>
                     </tr>
                   )
                 })}

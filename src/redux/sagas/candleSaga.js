@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
 
+//gets the candle information.
 function* fetchCandleSaga(action){
   try{
       const elementsResponse = yield axios.get(`/api/candle`);
@@ -10,7 +11,7 @@ function* fetchCandleSaga(action){
   };
 }
 
-
+//Not in use yet
 function* postCandleSaga (action){
   try{ 
     yield axios.post('/api/candle', action.payload)
@@ -20,6 +21,7 @@ function* postCandleSaga (action){
   }
 }
 
+// deletes the candle from the database
 function* deleteCandleSaga (action){
   try{    
     yield axios.delete(`/api/candle/${action.payload.id}`)
@@ -28,7 +30,8 @@ function* deleteCandleSaga (action){
     console.log('Error in DELETE CANDLE SAGA request:', err);
   }
 }
-// ${candle.id}
+
+// updates the candle information
 function* updateCandleSaga (action){
   try{    
     yield axios.put(`/api/candle/${action.payload.id}`, action.payload)
@@ -37,6 +40,7 @@ function* updateCandleSaga (action){
     console.log('Error in UPDATE CANDLE SAGA request:', err);
   }
 }
+
 function* candleSaga(action){
   yield takeEvery('FETCH_CANDLE', fetchCandleSaga);
   yield takeEvery('POST_CANDLE', postCandleSaga);
